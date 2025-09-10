@@ -11,7 +11,7 @@ Janitor performs important data cleaning operations
 
 ```{r}
 library(tidyverse)
-#install.packages('janitor')
+install.packages('janitor')
 library(janitor)
 ```
 
@@ -87,7 +87,7 @@ HINT HINT HINT
 
 Write a few sentences about what you found in the data. What's the story here?
 
-
+One thing I found interesting in the data was that student counseling had no fees in 2021. I think an interesting story could be about why did the university not put funding towards student counseling that year, and what sparked the steady increase that has been occurring since then. Has the university had to re-prioritize mental health over other sources of funding?
 
 
 
