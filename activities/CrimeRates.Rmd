@@ -28,7 +28,8 @@ crimes <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads
 ### Task 4: Calculate the total crime rate for each year (picking our unit!)
 
 ```{r}
-crimes |> mutate(total_rate = grand_total/population * 10000)
+crimes |> mutate(total_rate = grand_total/population * 10000) |>
+  select(year, total_rate, grand_total, population)
 ```
 
 
@@ -36,7 +37,10 @@ crimes |> mutate(total_rate = grand_total/population * 10000)
 ### Task 5: Calculate the violent and property crime rates for each year (same unit)
 
 ```{r}
-crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/population * 10000, property_rate = property_crime_total/population * 10000)
+crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/population * 10000, property_rate = property_crime_total/population * 10000,
+total_rate = grand_total/population * 10000) |>
+  select(year, violent_rate, property_rate, total_rate)
+  
 ```
 
 
@@ -45,7 +49,8 @@ crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/populat
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations?
 
-
+The year with the highest total rate was 1980, while the year 2020 had the lowest total rate. This matches my expectation due to the political climates at the times. The 80s were a time where the were several political issues driving public outrage, including the Cold War, the HIV/AIDS crisis, the rise of the "New Right," and more. 
+On the other hand, it's much more obvious why the lowest crime rate was 2020. This was the year of the Covid-19 pandemic and for a majority of the year, people were confined to their homes.
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
