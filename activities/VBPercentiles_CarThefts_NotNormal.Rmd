@@ -21,6 +21,8 @@ First, come up with two examples of data that might not be normally distributed 
 Then, how should a reporter working on a story about data that isn't normally distributed describe that data? Which statistical measures that we've covered in class should they use or avoid when doing so? Use the examples you came up with, and you should discuss your answers together, but each student submits separately.
 
 **Your answer**:
+It assumes a normal distribution because in random sampling, often times a trend/average occurs. One challenge that arises is that it can be difficult to accomplish truly random sampling. For example, if you try to accomplish random sampling by calling random people's homes, those most likely to have a land-line or at the very least answer to an unkown number, are usually older folks. Another example is if you are surveying house-hold income of people who have boats, they will usually be very wealthy.
+When dealing with data that isn't normally distributed, reporters should be transparent about their sampling methods and be mindful to adequately represent the population they are researching.
 
 
 
@@ -66,6 +68,7 @@ Write a couple of sentences that puts Maryland into context with the other teams
 
 **Answer**:
 
+Maryland had 223 aces, which puts them in the 95th percentile. This means they achieved more aces than 95% of teams.
 
 #------------------------------------------------------------------------------#
 
@@ -76,7 +79,7 @@ Follow along with the demo to learn how to calculate standard deviation and how 
 ### Task 1: Load the tidyverse
 
 ```{r}
-
+library(tidyverse)
 ```
 
 
@@ -124,6 +127,7 @@ Is the distribution normal or skewed in one direction? Write a sentence in which
 
 **Answer**:
 
+The distribution is skewed to the left. 68% of the data falls within the lines, which is the first standard deviation.
 
 
 
