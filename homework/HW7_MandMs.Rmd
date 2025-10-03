@@ -5,27 +5,46 @@ title: "HW7_MandMs"
 In this assignment, you'll be picking up where you left off with the M&Ms activity. You'll load the data and perform some basic statistical analysis. Follow the steps below to complete the assignment.
 
 ### Task 1: Load the tidyverse
+```{r}
+library(tidyverse)
 
+```
 
 ### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
+```{r}
+mandms <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
 
+```
 
 ### Task 3: Sample 5 rows of data from the dataset
+```{r}
+sample_5 <- mandms |> 
+  sample_n(5)
 
+```
 
 ### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
+```{r}
+sample_5|> summarize(mean = mean(red), sd = sd(red))
 
+```
 
 ### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
+```{r}
+mandms|> summarize(mean = mean(red), sd = sd(red))
 
+```
 
 ### Task 6: Compare the sample and population statistics
 
 Compare the two sets of means and standard deviations. Are they similar?
 
+They are similar but not exactly the same. 
+
 ### Task 7: Describe the results
 
 Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
 
+The sample had a smaller mean and a higher standard deviation. This is because the range of data is a lot smaller than the whole population. As for random sampling, this tells us that data pulled from smaller, random samples will yield slightly different results. This could be fine if you are trying to get a general idea of something, however, if you are looking for exact numbers, this method would not be very accurate.
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
