@@ -1,50 +1,85 @@
 ---
 title: "HW7_MandMs"
+date: 10/1/2025
 ---
+
 
 In this assignment, you'll be picking up where you left off with the M&Ms activity. You'll load the data and perform some basic statistical analysis. Follow the steps below to complete the assignment.
 
 ### Task 1: Load the tidyverse
+
 ```{r}
 library(tidyverse)
-
 ```
 
-### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
+
+### Task 2: Load an M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
 ```{r}
 mandms <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
-
 ```
 
-### Task 3: Sample 5 rows of data from the dataset
+
+### Task 3: Sample 5 rows of data from the dataset, and then sample 10 rows, saving each to separate dataframes called sample5 and sample10. Be sure to use set.seed(1234) before you start.
 ```{r}
-sample_5 <- mandms |> 
+set.seed(1234)
+
+sample5 <-mandms |> 
   sample_n(5)
-
+sample10 <-mandms |> 
+  sample_n(10)
 ```
 
-### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
+
+### Task 4: Calculate the mean, median and standard deviation of red M&Ms from each of the samples.
 ```{r}
-sample_5|> summarize(mean = mean(red), sd = sd(red))
-
+sample5 |> summarize(mean = mean(red), median = median(red), sd = sd(red))
+sample10 |> summarize(mean = mean(red), median = median(red), sd = sd(red))
 ```
 
-### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
+
+### Task 5: Calculate the mean, median and standard deviation of red M&Ms from the population
+
 ```{r}
-mandms|> summarize(mean = mean(red), sd = sd(red))
-
+mandms |> summarize(mean = mean(red), median = median(red), sd = sd(red))
 ```
 
-### Task 6: Compare the sample and population statistics
+### Task 6: Make three histograms: one each for sample5, sample10 and the original dataset. Include a headline. Use a consistent binwidth.
 
-Compare the two sets of means and standard deviations. Are they similar?
+```{r}
+mandms |>
+ ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 5)
+labs(title = "Red M&Ms - Original Dataset")
 
-They are similar but not exactly the same. 
+sample5 |>
+ ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 5)
+labs(title = "Red M&Ms Sample5")
 
-### Task 7: Describe the results
+sample10 |>
+ ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 5)
+labs(title = "Red M&Ms Sample10")
+```
 
-Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
 
-The sample had a smaller mean and a higher standard deviation. This is because the range of data is a lot smaller than the whole population. As for random sampling, this tells us that data pulled from smaller, random samples will yield slightly different results. This could be fine if you are trying to get a general idea of something, however, if you are looking for exact numbers, this method would not be very accurate.
+### Task 7: Answer questions
+
+
+Compare the three sets of means, standard deviations and histograms. Which are more helpful to you in understanding the accuracy of the samples?
+
+For this particular dataset, using the histograms, it's easier to see that a larger sample size yields results more similar to that of the original dataset. With sample5, there isn't enough information to observe type of curve that would accurately reflect the data. With sample10, there's more information for the histogram , therefore, you are able to make better observations about the skew. Even the general shape resembles that of the full dataset. 
+
+What does this exercise tell you about the relationship between sample size and estimate accuracy?
+
+This exercise tells me that larger sample sizes yield more accurate information when it relates to the original dataset.Especially when it come to random sampling, more information is better.
+
+How does random sampling introduce variation into statistical estimates?
+
+Random sampling introduces variation because with a limited number of random values, the range may be different from that of the  original dataset, therefore, effecting the mean, median, and standard deviation. 
+
+If you repeated this process, would the samples always be identical? Why or why not?
+
+They would not because the samples would contain different values. This is because the samples are random. So each randomly generated sample would be different.
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
