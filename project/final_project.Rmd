@@ -1,0 +1,18 @@
+---
+title: "final_project"
+author: "Kaya Bogot"
+date: "2025-11-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+```{r}
+billboard <- read.csv("billboard_hot _100_number ones_database_data.csv")
+```
+
