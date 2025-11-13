@@ -13,6 +13,24 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 ```{r}
-billboard <- read.csv("billboard_hot _100_number ones_database_data.csv")
+billboard <- read_csv("billboard_hot _100_number ones_database_data.csv")
+data_dictionary <- read_csv("data_dictionary.csv")
+lyrical_topics <- read_csv("lyrical_topics.csv")
+```
+
+-- What does it contain and what time period does it cover?
+
+--Which columns will be most important for your analysis?
+
+--What's missing that you might need or want?
+
+--Select a relevant column and produce basic descriptive statistics on the mean, median, lowest and highest values.
+
+Next, propose a newsworthy hypothesis (or several of them) for your dataset. You'll be looking to find (or eliminate possible story ideas) using the techniques you've learned in this class. You'll start that effort this week by coming up with some theories or questions that you're interested in exploring that can be answered with the dataset you selected.
+
+--What questions do you have about it or need help answering?
+
+```{r}
+
 ```
 
