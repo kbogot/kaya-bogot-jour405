@@ -20,17 +20,36 @@ lyrical_topics <- read_csv("lyrical_topics.csv")
 
 -- What does it contain and what time period does it cover?
 
+The billboard chart contains information about songs and their artists, along with data about their time on billboard charts, their genre, danceability, instruments, etc.
+It covers the time period from 1958-2025.
+
 --Which columns will be most important for your analysis?
+
+Danceability, song structure, weeks at number 1, rating.
 
 --What's missing that you might need or want?
 
+Copies sold/streams, depending on how it was consumed at it's release. To determine general popularity besides chart numbers.
+
 --Select a relevant column and produce basic descriptive statistics on the mean, median, lowest and highest values.
+
+```{r}
+billboard |> 
+  summarize(
+    mean_Danceability   = mean(Danceability, na.rm = TRUE),
+    median_Danceability = median(Danceability, na.rm = TRUE),
+    max_Danceability    = max(Danceability, na.rm = TRUE),
+    min_Danceability    = min(Danceability, na.rm = TRUE)
+  )
+
+```
+
 
 Next, propose a newsworthy hypothesis (or several of them) for your dataset. You'll be looking to find (or eliminate possible story ideas) using the techniques you've learned in this class. You'll start that effort this week by coming up with some theories or questions that you're interested in exploring that can be answered with the dataset you selected.
 
+Hypothesis: Specific song structures are more popular than others. Leading to higher ratings, weeks at number 1. Song structure also effects danceability. I'd also like to investigate whether certain song structures were more popular in different time periods.
+
 --What questions do you have about it or need help answering?
 
-```{r}
-
-```
+Is there a simple way I can find streams/copies sold? Or will I have to search 1 by 1? I wasn't sure if there was a database or something.
 
