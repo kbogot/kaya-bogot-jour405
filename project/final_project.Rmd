@@ -10,7 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-library(tidyverse)
+library(tidyverse)  # For data manipulation and visualization
+library(lubridate)  # For handling dates
+library(knitr)      # For nice tables
+library(scales)     # For better axis formatting
 ```
 ```{r}
 billboard <- read_csv("billboard_hot _100_number ones_database_data.csv")
@@ -25,7 +28,7 @@ It covers the time period from 1958-2025.
 
 --Which columns will be most important for your analysis?
 
-Danceability, song structure, weeks at number 1, rating.
+Danceability, song structure, and weeks at number 1.
 
 --What's missing that you might need or want?
 
@@ -39,17 +42,85 @@ billboard |>
     mean_Danceability   = mean(Danceability, na.rm = TRUE),
     median_Danceability = median(Danceability, na.rm = TRUE),
     max_Danceability    = max(Danceability, na.rm = TRUE),
-    min_Danceability    = min(Danceability, na.rm = TRUE)
+    min_Danceability    = min(Danceability, na.rm = TRUE),
+    sd_Danceability = sd(Danceability, na.rm = TRUE)
   )
 
 ```
 
+For this step, I just wanted to get a baseline of the data surrounding Danceability.
 
 Next, propose a newsworthy hypothesis (or several of them) for your dataset. You'll be looking to find (or eliminate possible story ideas) using the techniques you've learned in this class. You'll start that effort this week by coming up with some theories or questions that you're interested in exploring that can be answered with the dataset you selected.
 
-Hypothesis: Specific song structures are more popular than others. Leading to higher ratings, weeks at number 1. Song structure also effects danceability. I'd also like to investigate whether certain song structures were more popular in different time periods.
+Null Hypothesis: Song structures do not effect the popularity of songs, nor does it effect the danceability.
+
+Alternative Hypothesis: Specific song structures are more popular than others. Leading to more weeks at number 1. Song structure also effects danceability, with certain structures yielding higher danceability scores. I'd also like to investigate whether certain song structures were more popular in different time periods.
 
 --What questions do you have about it or need help answering?
 
 Is there a simple way I can find streams/copies sold? Or will I have to search 1 by 1? I wasn't sure if there was a database or something.
 
+**Part 2**
+Fix and revise your project based on the grading feedback.
+
+Run at least two advanced statistical tests (t-test, Anova, z-score, etc.) that fit your project. You may need to revise the null and alternate hypothesis as necessary.
+
+```{r}
+z_scores <- billboard |>
+  transmute(
+
+    z_weeks_number_one = (`Weeks at Number One` - mean(`Weeks at Number One`, na.rm = TRUE)) /
+                          sd(`Weeks at Number One`, na.rm = TRUE),
+    z_danceability     = (Danceability - mean(Danceability, na.rm = TRUE)) /
+                          sd(Danceability, na.rm = TRUE)
+  )
+
+
+billboard |>
+  select(`Weeks at Number One`, Danceability) |>
+  bind_cols(z_scores) |>
+  head(10)
+
+
+
+```
+
+```{r}
+anova_dance <- aov(Danceability ~ `Song Structure`, data = billboard)
+summary(anova_dance)
+
+anova_weeks <- aov(`Weeks at Number One` ~ `Song Structure`, data = billboard)
+summary(anova_weeks)
+
+```
+```{r}
+
+billboard_summary <- billboard|>
+  group_by(`Song Structure`) |>
+  summarise(
+    mean_danceability = mean(Danceability, na.rm = TRUE),
+    mean_weeks_number_one = mean(`Weeks at Number One`, na.rm = TRUE),
+    n_songs = n()
+  ) |>
+  arrange(desc(n_songs))  
+
+billboard_summary
+```
+
+
+Describe and interpret the results from the statistical tests.
+
+Create at least one data visualization (use ggplot)
+
+```{r}
+structure_popularity <- billboard
+
+ggplot(structure_popularity) +
+  geom_point(aes(x = `Song Structure`, y = `Weeks at Number One`)) +
+  geom_smooth(aes(x = `Song Structure`, y = `Weeks at Number One`), method = "lm") +
+  expand_limits(x = 0, y = 0)
+
+```
+
+
+If you encounter errors and become stuck, research the error and try to solve it as best you can. Spell out those troubleshooting steps.
