@@ -54,16 +54,17 @@ Next, propose a newsworthy hypothesis (or several of them) for your dataset. You
 
 Null Hypothesis: Song structures do not effect the popularity of songs, nor does it effect the danceability.
 
-Alternative Hypothesis: Specific song structures are more popular than others. Leading to more weeks at number 1. Song structure also effects danceability, with certain structures yielding higher danceability scores. I'd also like to investigate whether certain song structures were more popular in different time periods.
+Alternative Hypothesis: Specific song structures are more popular than others. Leading to more weeks at number 1. Song structure also effects danceability, with certain structures yielding higher danceability scores. 
 
 --What questions do you have about it or need help answering?
 
 Is there a simple way I can find streams/copies sold? Or will I have to search 1 by 1? I wasn't sure if there was a database or something.
 
 **Part 2**
-Fix and revise your project based on the grading feedback.
 
-Run at least two advanced statistical tests (t-test, Anova, z-score, etc.) that fit your project. You may need to revise the null and alternate hypothesis as necessary.
+**Fix and revise your project based on the grading feedback.**
+
+**Run at least two advanced statistical tests (t-test, Anova, z-score, etc.) that fit your project. You may need to revise the null and alternate hypothesis as necessary.**
 
 ```{r}
 z_scores <- billboard |>
@@ -85,6 +86,8 @@ billboard |>
 
 ```
 
+For the z-scores, there were no obvious standouts. There were no scores significantly below -2 or above +2, which would be unusual. 
+
 ```{r}
 anova_dance <- aov(Danceability ~ `Song Structure`, data = billboard)
 summary(anova_dance)
@@ -93,6 +96,8 @@ anova_weeks <- aov(`Weeks at Number One` ~ `Song Structure`, data = billboard)
 summary(anova_weeks)
 
 ```
+The results of these ANOVA tests would allow up to reject the null hypothesis. The p-values are drastically below 0.05, meaning that they are statistically significant. Therefore, there is a very strong association between Song Sturctures and Danceability/popularity.
+
 ```{r}
 
 billboard_summary <- billboard|>
@@ -107,10 +112,9 @@ billboard_summary <- billboard|>
 billboard_summary
 ```
 
+This plot was just to organize the data and see how many of each stong structure these was. Plus, it calculated the mean danceability and popularity of each structure.
 
-Describe and interpret the results from the statistical tests.
-
-Create at least one data visualization (use ggplot)
+**Create at least one data visualization (use ggplot)**
 
 ```{r}
 structure_popularity <- billboard
@@ -121,6 +125,7 @@ ggplot(structure_popularity) +
   expand_limits(x = 0, y = 0)
 
 ```
+This graph is interesting because there appears to be a bit of a skew to the right. This isn't exactly a histogram, but it vaguely takes the shape of one. We can see that more songs in the "C" category of song structures spent more time at number one on the billboard chart.
 
 
 If you encounter errors and become stuck, research the error and try to solve it as best you can. Spell out those troubleshooting steps.
