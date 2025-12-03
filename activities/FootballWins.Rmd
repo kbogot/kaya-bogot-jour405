@@ -55,7 +55,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+This model is useful because it breaks down different aspect of football scores and compares them statistically to better measure significant outcomes. This is done through coefficients and measuring significant or insignificant changes.
 
 ## Correlation Analysis
 
@@ -81,8 +81,10 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
+Based on the model, points scored had the biggest impact on wins. It has the most significant p-value. Yards gained does not have much of an impact.
 
 ## Using the Model
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+We can use this model to compare different factors and their significance. This chart in particular seems to indicate that there is a strong correlation between points scored and yards gained, leading to a higher impact on wins.
