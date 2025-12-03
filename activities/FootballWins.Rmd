@@ -88,3 +88,4 @@ Based on the model, points scored had the biggest impact on wins. It has the mos
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
 
 We can use this model to compare different factors and their significance. This chart in particular seems to indicate that there is a strong correlation between points scored and yards gained, leading to a higher impact on wins.
+When covering a game, you could track what elements impact the number of wins. So for basketball, you could look at steals, layups, 3-pointers, etc, and compare which factors lead are more significant in a winning outcome.
