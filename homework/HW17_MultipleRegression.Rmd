@@ -27,8 +27,9 @@ head(md_turnout)
 
 Before building our model, let's explore the data to understand the variables and their relationships. Examine the correlation matrix to see how the independent variables relate to each other and to the dependent variable (voter turnout). Which variables seem to be correlated? Are there any that are not correlated at all? Also look at the multiple scatterplots. Which variables seem to have a linear relationship with the dependent variable? Which do not?
 
-ANSWER HERE
-
+Some of the variables that seem to be correlated to voter turnout are unemployment and race. These values are also the most obviously linear, with lower unemployment leading to higher voter turnout, and a higher white population leading to higher turnout as well.
+Education and income seemed to be less correlated to voter turnout.
+It's also interesting and worth mentioning that there seems to be an obvious correlation between the two independent variable, income and bachelors-higher. 
 
 ```{r}
 # Summary statistics
@@ -90,7 +91,10 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Examine the output of the model, checking the coefficients, residuals, and overall model fit. How well does this multiple variable model predict turnout? Do any of the variables seem to be insignificant? Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+This model is useful in predicting turnout.
+Based on the coefficients and p-values, we can conclude that the independent variables that are most significant are income, median age, and Pct white.
+Additionally, the residual standard error of 0.0217 tells us that the models predictions are off by only about +/- 2.2%. Based on the multiple and adjusted r-squared values, we can also conclude that the model accurately explains over 80% of the variation in turnout.
+Finally, based on the f-statistic and p-value, we can see that our model is isueful in predicting the outcome of our data and that it is statistically significant.
 
 ```{r}
 # Build initial model with all predictors
@@ -104,19 +108,23 @@ summary(initial_model)
 
 Create three alternative models by adding or removing variables to see if we can improve the model's performance. Turnout will always be the dependent variable, but you should alter the independent variables by removing or adding some. Then compare the models using adjusted R-squared values. Are any of the models significantly better than the others?
 
-ANSWER HERE
+This comparison shows that the full model performs the best, explaining far more of the variation in turnout than any of the added models. All the other models have noticeably lower adjusted R-squared values, meaning that removing variables makes the model less accurate. Even though some independent variables in the full model aren’t statistically significant, they still contribute to the pigger pisture of the full model. No alternative model is better than the full model.
 
 ```{r}
 # Model 2
-model2 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model2 <- lm(turnout ~ income, data = md_turnout)
 summary(model2)
 
 # Model 3
-model3 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model3 <- lm(turnout ~ median_age, data = md_turnout)
 summary(model3)
 
 # Model 4
-model4 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model4 <- lm(turnout ~ pct_white, data = md_turnout)
+summary(model4)
+
+# Model 5
+model5 <- lm(turnout ~ pct_unemployed, data = md_turnout)
 summary(model4)
 
 # Compare models
@@ -124,13 +132,15 @@ cat("Model 1 (Full model) - Adjusted R-squared:", summary(initial_model)$adj.r.s
 cat("Model 2 - Adjusted R-squared:", summary(model2)$adj.r.squared, "\n")
 cat("Model 3 - Adjusted R-squared:", summary(model3)$adj.r.squared, "\n")
 cat("Model 4 - Adjusted R-squared:", summary(model4)$adj.r.squared, "\n")
+cat("Model 5 - Adjusted R-squared:", summary(model5)$adj.r.squared, "\n")
 
 # Create comparison chart
-model_names <- c("Full model", "Model 2", "Model 3", "Model 4")
+model_names <- c("Full model", "Model 2", "Model 3", "Model 4", "Model 5")
 adj_r_squared <- c(summary(initial_model)$adj.r.squared,
                    summary(model2)$adj.r.squared,
                    summary(model3)$adj.r.squared,
-                   summary(model4)$adj.r.squared)
+                   summary(model4)$adj.r.squared,
+                   summary(model5)$adj.r.squared)
 
 model_comparison <- data.frame(Model = model_names, Adjusted_R_squared = adj_r_squared)
 ggplot(model_comparison, aes(x = reorder(Model, Adjusted_R_squared), y = Adjusted_R_squared)) +
@@ -145,4 +155,4 @@ ggplot(model_comparison, aes(x = reorder(Model, Adjusted_R_squared), y = Adjuste
 
 Without using the words "multiple regression model", describe how you could use this analysis to cover an election or voter participation story.
 
-ANSWER HERE
+Using this analysis, we could examine which factors are most significant in determining voter turnout in an election. It could be interesting to examine the change in this data over the years and see if efforts to address the deficits has made any difference.
