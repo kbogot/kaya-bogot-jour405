@@ -96,7 +96,10 @@ anova_weeks <- aov(`Weeks at Number One` ~ `Song Structure`, data = billboard)
 summary(anova_weeks)
 
 ```
-The results of these ANOVA tests would allow up to reject the null hypothesis. The p-values are drastically below 0.05, meaning that they are statistically significant. Therefore, there is a very strong association between Song Sturctures and Danceability/popularity.
+The ANOVA results show that song structure is statistically significant for both danceability and popularity, allowing us to reject the null hypothesis in both cases. For danceability, the results produced an F-statistic of 4.44 and a p-value of 4.38e-15 (way below 0.05, meaning it is statistically significant), meaning that certain song structures are more indicative of danceability that it would be by chance. Therefore, there is a strong relationship between song structure and how danceable a song is.
+
+For popularity, the F-statistic was 1.52 and the p-value was 0.0306, which is statistically significant but less so than danceability. This means that while song structure influences popularity, it explains less of the overall results than danceability.
+
 
 ```{r}
 
@@ -125,7 +128,10 @@ ggplot(structure_popularity) +
   expand_limits(x = 0, y = 0)
 
 ```
-This graph is interesting because there appears to be a bit of a skew to the right. This isn't exactly a histogram, but it vaguely takes the shape of one. We can see that more songs in the "C" category of song structures spent more time at number one on the billboard chart.
+This graph is interesting because there appears to be a bit of a skew to the right. This isn't exactly a histogram, but it vaguely takes the shape of one. We can see that more songs in the "C" and "E" category of song structures spent more time at number one on the billboard chart.This is mostly apparent when looking above the 10 week mark. These findings reinforce my alternative hypothesis that specific song structures are more popular than others, leading to more weeks at number 1.
 
+**Conclusion**
 
-If you encounter errors and become stuck, research the error and try to solve it as best you can. Spell out those troubleshooting steps.
+Over the course of this project, I have analyzed how song structure effects the danceability and popularity of songs. By alternative hypothesis being that "specific song structures are more popular than others, leading to more weeks at number 1. Song structure also effects danceability, with certain structures yielding higher danceability scores." By first running an ANOVA test, it was clear that both factors were statistically significant in predicting the danceability and popularity of a song. Additionally, by creating a visualization of the relationship between weeks at number one and song sturctures, I was able to visualize exactly which categories yielded more weeks at number 1. "C" and "E" structures generally had more songs at number 1 for more than 10 weeks.
+As a reporter, it would be interesting to see if this kind of data is being used in the music industry to create hits. It would also be interesting to examine the psychology of why these songs structure are more appealing to listeners. In a story such as these, I would use this data and talk to experts in psychology and music about the "why" behind this correlation and find out more about the causation. I would also talk to listeners and find out their opinions on songs and why they think there is a causation. One potential porblem, however, is if this song structure system is universal, or if it is just unique to the creator of this data set. If it is not universal, it would require more research or cross-referencing to existing systems.
+
